@@ -1,3 +1,6 @@
 # seleniumproject
-hkjhkjhkhkj
-kjhkjhkjhkjh
+
+Please create a file: src/test/resources/creds.properties
+Format: 
+user=
+password=
