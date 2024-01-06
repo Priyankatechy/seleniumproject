@@ -3,7 +3,7 @@
 Feature: Login
 
   @login
-  Scenario: fsdfsdfsd Login with Valid Credentials
+  Scenario: Successful Login with Valid Credentials
     Given User Launch Chrome Browser
     And User opens URL "https://dsportalapp.herokuapp.com"
     And Page Title should be "Numpy Ninja"
