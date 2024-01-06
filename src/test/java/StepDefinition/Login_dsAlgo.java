@@ -1,5 +1,7 @@
 package StepDefinition;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,97 +25,55 @@ public class Login_dsAlgo {
 	
 	WebDriver driver;
 	WebElement signInElm;
-	String baseUrl ;
+	String baseUrl = "https://dsportalapp.herokuapp.com";
 	LoginPOM homePage;
 	QueuePOM queuePage;
-	@Given("User Launch Chrome Browser")
-	public void user_launch_chrome_browser() {
+	String pageName;
+	@Before
+	public void setup() {
 		driver =  new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-
-		
-	}
-
-	@Given("User opens URL {string}")
-	public void user_opens_url(String url) {
-	    // Write code here that turns the phrase above into concrete actions
-		baseUrl = url;
-		driver.get(url);
-		
-	}
-	@Given("Page Title should be {string}")
-	public void page_title_should_be(String title) {
-		
-		//String t = driver.getTitle();
-		
-		
-	    // Write code here that turns the phrase above into concrete actions
-	    // new io.cucumber.java.PendingException();
-	}
-
-	@Given("Get Started button appeared")
-	public void get_started_button_appeared() {
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		
-		
-	}
-
-	@Given("User clicks on the Get Started button")
-	public void user_clicks_on_the_get_started_button() {
-		GetStartedPom gsPom = new GetStartedPom(driver);
-		gsPom.clickGetStarted();
 	}
 
 	
-
-	@Given("User clicks on Sign in button")
-	public void user_clicks_on_sign_in_button() {
-
+	@Given("User logged in to dsportalapp")
+	public void user_logged_in_to_dsportalapp() {
+		driver.get(baseUrl);
+		
+		GetStartedPom gsPom = new GetStartedPom(driver);
+		gsPom.clickGetStarted();
+		
 		homePage = new LoginPOM(driver);
 		homePage.clickSignInLink();
 		
-	}
-
-
-	@Given("User enters Valid Username as {string} and Password as {string}")
-	public void user_enters_valid_username_as_and_password_as(String userName, String password) {
-		
-		homePage.loginToPage(userName, password);
+		homePage.loginToPage("phoenixteam", "phoenix123/");
 		
 	}
 	
-
-	@Then("User should be logged in and can see home page")
-	public void user_should_be_logged_in_and_can_see_home_page() {
-	 
-	}
-
-	@Then("Click on Get Started button in Queue section")
-	public void click_on_get_started_button_in_queue_section() {
+	@When("User reviews queue section")
+	public void user_reviews_queue_section() {
 		
 		homePage.clickQueueGetStarted();
-//		driver.get("https://dsportalapp.herokuapp.com/queue/");
+		
 	}
-	@Then("verify editor is working for following pages:")
-	public void verify_editor_is_working_for_following_pages(io.cucumber.datatable.DataTable table) {
-	    // Write code here that turns the phrase above into concrete actions
-	    // For automatic transformation, change DataTable to one of
-	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-	    // rows = {"a", "asd","sdf"}
-	    // For other transformations you can register a DataTableType.
-		List<String> rows = table.asList();
-		int len = rows.size();
+	@Then("user is able to navigate to following pages:")
+	public void user_is_able_to_navigate_to_following_pages(io.cucumber.datatable.DataTable table) {
+		List<String> lst = table.asList();
+		int len = lst.size();
 		
 		queuePage = new QueuePOM(driver);
 		
-		for(int i=0; i<len; i++) {
-			String pageName = rows.get(i);
+		for(int i=0; i<len; i++) 
+		{
+			pageName = lst.get(i);
 			queuePage.run_print_hello_world(pageName);
 		}
+	}
+	
+	
+	@After
+	public void teardown() {
 		driver.close();
-		
 	}
 	
 }

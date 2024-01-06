@@ -3,6 +3,8 @@ package PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import junit.framework.Assert;
+
 	public class QueuePOM {
 	
 	WebDriver driver = null;
@@ -35,10 +37,9 @@ import org.openqa.selenium.WebDriver;
 	
 	
 	public void run_print_hello_world(String pageName) {
-//Open url: https://dsportalapp.herokuapp.com/queue/implementation-lists/
 		
 		driver.get(baseUrl + "/queue/"+pageName+"/");
-		//click tryhere button
+
 		driver.findElement(try_here_button).click();
 		// define variable string input= print('implementation-lists')
 		String input = "print('"+pageName+"')";
@@ -48,20 +49,11 @@ import org.openqa.selenium.WebDriver;
 		driver.findElement(run_button).click();
 
 		String output = driver.findElement(By.id("output")).getText();
-		if(output == pageName) {
-			System.out.println("##################");
-			System.out.println(output);
-			System.out.println("##################");
-//
-		}
-		else
-		{
-			System.out.println("##################");
-			System.out.println(output);
-			System.out.println("##################");
-		}
-	
-	
+		
+		org.junit.Assert.assertEquals(
+				"Actual value,("+output+") is not matching with expected value("+pageName+ "), Please review!", 
+				pageName, 
+				output);
 	}}
 
 
