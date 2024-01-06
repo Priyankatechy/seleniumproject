@@ -26,6 +26,9 @@ public class Login_dsAlgo {
 	LoginPOM homePage;
 	QueuePOM queuePage;
 	String pageName;
+	
+	String usr;
+	String passwd;
 	@Before
 	public void setup() {
 		driver =  new ChromeDriver();
@@ -41,9 +44,10 @@ public class Login_dsAlgo {
 		
 		homePage = new LoginPOM(driver);
 		homePage.clickSignInLink();
-		
-		homePage.loginToPage("phoenixteam", "phoenix123/");		
+	
+		homePage.loginToPage();
 	}
+	
 	
 	@When("User reviews queue section")
 	public void user_reviews_queue_section() {

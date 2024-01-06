@@ -1,5 +1,10 @@
 package PageObject;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,6 +22,8 @@ public class LoginPOM {
 	
 	By click_queueGetStarted = By.xpath("//body/div[3]/div[5]/div[1]/div[1]/a[1]");
 	
+	String user;
+	String password;
 	
 	public LoginPOM(WebDriver driver) {
 		
@@ -24,15 +31,34 @@ public class LoginPOM {
 	}
 	
 	
-
-	public void loginToPage(String userName, String password) {
-		driver.findElement(enter_userName).sendKeys(userName);
+   
+	public void loginToPage() {
+		retrieveCreds();
+		driver.findElement(enter_userName).sendKeys(user);
 		driver.findElement(enter_password).sendKeys(password);
 		driver.findElement(click_login).click();
 
 	}
 	
 	
+	public void retrieveCreds() {
+		try (InputStream input = new FileInputStream("/Users/aditya/eclipse-workspace/SDET141_BDD/src/test/resources/creds.properties")) {
+
+            Properties prop = new Properties();
+
+            // load a properties file
+            prop.load(input);
+
+            // get the property value and print it out
+          
+            user = prop.getProperty("user");
+            password = prop.getProperty("password");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+		
+	}
 	
 	public void clickSignInLink() {
 		
