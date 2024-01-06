@@ -7,16 +7,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.List;
-import java.util.concurrent.*;
 
 
 import java.time.Duration;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.WebDriver.*;
 
 import org.openqa.selenium.chrome.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import PageObject.GetStartedPom;
 import PageObject.LoginPOM;
