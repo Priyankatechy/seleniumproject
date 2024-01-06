@@ -34,7 +34,6 @@ public class Login_dsAlgo {
 		driver =  new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	}
-
 	
 	@Given("User logged in to dsportalapp")
 	public void user_logged_in_to_dsportalapp() {
@@ -46,8 +45,7 @@ public class Login_dsAlgo {
 		homePage = new LoginPOM(driver);
 		homePage.clickSignInLink();
 		
-		homePage.loginToPage("phoenixteam", "phoenix123/");
-		
+		homePage.loginToPage("phoenixteam", "phoenix123/");		
 	}
 	
 	@When("User reviews queue section")
