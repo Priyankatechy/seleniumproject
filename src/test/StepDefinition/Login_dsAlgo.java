@@ -44,7 +44,7 @@ public class Login_dsAlgo {
 	@Given("Page Title should be {string}")
 	public void page_title_should_be(String title) {
 		
-		//String t = driver.getTitle();
+		String t = driver.getTitle();
 		
 		
 	    // Write code here that turns the phrase above into concrete actions
