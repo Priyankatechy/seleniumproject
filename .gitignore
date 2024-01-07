@@ -1,2 +1,3 @@
 src/test/resources/creds.properties
-*/target/*
+target/
+test-output/
